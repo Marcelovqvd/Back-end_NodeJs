@@ -18,3 +18,7 @@ editorConfig
 yarn add eslint -D
 yarn eslint --init
 yarn add -D @typescript-eslint/eslint-plugin@latest eslint-config-airbnb-base@latest eslint-plugin-import@^2.21.2 @typescript-eslint/parser@latest
+
+Importando arquivos TS
+yarn add -D eslint-import-resolver-typescript - p o código entender as importações ods arquivos typescript;
+novas settings em .eslintrc.json
