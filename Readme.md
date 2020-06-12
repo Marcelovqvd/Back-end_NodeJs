@@ -22,3 +22,6 @@ yarn add -D @typescript-eslint/eslint-plugin@latest eslint-config-airbnb-base@la
 Importando arquivos TS
 yarn add -D eslint-import-resolver-typescript - p o código entender as importações ods arquivos typescript;
 novas settings em .eslintrc.json
+
+Prettier
+yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
