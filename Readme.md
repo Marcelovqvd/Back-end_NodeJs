@@ -25,3 +25,6 @@ novas settings em .eslintrc.json
 
 Prettier
 yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+
+Debugando NodeJS
+flag --inspect em package.json para que o VSCode se conecte ao código em desenvolvimento
