@@ -1,4 +1,5 @@
- Configurando estrutura
+ ## Configurando estrutura e padrões
+
  yarn add express
  yarn add typescript
  yarn tsc --init - cria o tsconfig.json
@@ -25,3 +26,9 @@ novas settings em .eslintrc.json
 
 Prettier
 yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+
+Debugando NodeJS
+flag --inspect em package.json para que o VSCode se conecte ao código em desenvolvimento
+
+## Construindo aplicação
+yarn add uuidv4 - lib para criar id
