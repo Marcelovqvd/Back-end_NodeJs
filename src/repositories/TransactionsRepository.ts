@@ -1,5 +1,18 @@
 import Transaction from '../models/Transaction';
 
+interface CreateTransactionDTO {
+  value: number,
+  description: string,
+  type: 'debit' | 'credit' | 'installment_credit',
+  installments: null,
+  card: {
+    number: string;
+    expiry: string;
+    cvv: string;
+    holder: string;
+  }
+}
+
 class TransactionsRepository {
   private transactions: Transaction[];
 
@@ -7,18 +20,14 @@ class TransactionsRepository {
     this.transactions = [];
   }
 
-  public create(value: number, description: string, type: string, installments: number, date: Date): Transaction {
+  public all(): Transaction[]  {
+    return this.transactions;
+  }
 
-    const transaction = new Transaction(
-      value,
-      description,
-      type,
-      installments,
-      date
-    )
+  public create({ value, description, type, installments, card }: CreateTransactionDTO): Transaction {
+    const transaction = new Transaction({value, description, type, installments, card})
 
     this.transactions.push(transaction);
-
     return transaction;
   }
 }

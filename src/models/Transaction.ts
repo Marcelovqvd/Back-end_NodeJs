@@ -7,19 +7,24 @@ class Transaction {
 
   description: string;
 
-  type: string;
+  type: 'debit' | 'credit' | 'installment_credit';
 
-  installments: number;
+  installments: null;
 
-  date: Date;
+  card: {
+    number: string,
+		expiry: string,
+		cvv: string,
+		holder: string
+  };
 
-  constructor(value: number, description: string, type: string, installments: number, date: Date) {
+  constructor({value, description, type, installments, card}: Omit<Transaction, 'id'>) {
     this.id = uuid();
     this.value = value;
     this.description = description;
     this.type = type;
     this.installments = installments;
-    this.date = date;
+    this.card = card;
   }
 }
 

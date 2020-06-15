@@ -1,51 +1,39 @@
 import { Router, request, response } from 'express';
-import { uuid } from 'uuidv4';
 
-import Transaction from '../models/Transaction';
 import TransactionsRepository from '../repositories/TransactionsRepository';
+import CreateTransactionService from '../services/CreateTransactionService';
 
 const transactionsRouter = Router();
 const transactionRepository = new TransactionsRepository();
 
 transactionsRouter.get('/', (request, response) => {
-  // const { value, description, type, installments } = request.query;
-  // const query = request.query;
+  try {
+    const transactions = transactionRepository.all();
 
-  return response.json(transactions);
-})
+    return response.json(transactions);
+  } catch(err){
+    response.status(400).json({ error: err.message });
+  }
+});
 
 transactionsRouter.post('/', (request, response) => {
-  const { value, description, type, installments, date } = request.body;
+  try {
+    const { value, description, type, installments, card } = request.body;
 
-  const transaction = transactionRepository.create(
-    value,
-    description,
-    type,
-    installments,
-    date
-  )
+    const createTransaction = new CreateTransactionService(transactionRepository);
 
-  return response.json(transaction)
-})
+    const transaction = createTransaction.execute({
+      value,
+      description,
+      type,
+      installments,
+      card
+    })
 
-transactionsRouter.put('/:id', (request, response) => {
-  const { id } = request.params;
-  const { value, description, type, installments, date } = request.body;
-
-  const transactionIndex = transactions.findIndex(transaction => transaction.id === id);
-
-  const transaction = {
-    id,
-    value,
-    description,
-    type,
-    installments,
-    date
+    return response.json(transaction)
+  } catch (err) {
+    return response.status(400).json({ error: 'Unexpected error'})
   }
-
-  transactions[transactionIndex] = [transaction];
-
-  return response.json(transaction);
-});
+})
 
 export default transactionsRouter;
